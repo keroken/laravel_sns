@@ -15,7 +15,8 @@
             <div class="form-group">
                 <label for="post" class="col-sm-3 control-label">メッセージ</label>
                 <div class="col-sm-6">
-                    <input type="text" name="message" id="message" class="form-control"/>
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"/>
+                    <input type="text" name="body" id="body" class="form-control"/>
                 </div>
             </div>
             <!-- 投稿ボタン -->
@@ -46,11 +47,12 @@
                 <tbody>
                     @foreach ($posts as $post)
                     <tr>
-                <!-- message -->
+                <!-- body -->
                         <td class="table-text">
-                            <div>{{ $post->message }}</div>
-                            <div>{{ $post->username }}</div>
+                            <div>{{ $post->body}}</div>
+                            <div>{{ $post->user_id }}</div>
                         </td>
+                        　@if (Auth::id() == $post->user_id) 
                             <!-- 更新ボタン -->
                             <td>
                                 <form action="{{ url('postedit/'.$post->id) }}" method="POST">
@@ -70,6 +72,7 @@
                                     </button>
                                 </form>
                             </td>
+                          @endif
                     </tr>
                     @endforeach
                 </tbody>

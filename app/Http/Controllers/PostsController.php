@@ -28,7 +28,7 @@ class postsController extends Controller
     }
     
     //更新画面
-    public function edit(post $post)
+    public function edit(Post $post)
     {
         return view('postedit', ['post' => $post]);
     }
@@ -38,7 +38,7 @@ class postsController extends Controller
     {
         // バリデーション
         $validator = Validator::make($request->all(), [
-            'message' => 'required',
+            'body' => 'required',
 
         ]);
         //バリデーション：エラー
@@ -50,8 +50,8 @@ class postsController extends Controller
         
         // データ更新
         $post = Post::find($request->id);
-        $post->message = $request->message;
-        $post->save(); //「/」ルートにリダイレクト
+        $post->body = $request->body;
+        $post->save();
         return redirect('/'); 
     }
     
@@ -63,7 +63,7 @@ class postsController extends Controller
         
         // バリデーション
         $validator = Validator::make($request->all(), [
-            'message' => 'required',
+            'body' => 'required',
         ]);
         //バリデーション：エラー
         if ($validator->fails()) {
@@ -71,17 +71,11 @@ class postsController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
-        
-    // User取得
-        $user = Auth::user();
     
     // Eloquent モデル
         $post = new Post;
-        $post->user_id = $user->id;
-        $post->username = $user->name;
-        $post->message = $request->message;
-        // $post->image_url = $request->image_url;
-        // $request->user()->posts()->save($post);
+        $post->user_id = $request->user_id;
+        $post->body = $request->body;
         $post->save();
         return redirect('/');
     }

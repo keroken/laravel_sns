@@ -9,12 +9,6 @@ class User extends Authenticatable
 {
     use Notifiable;
     
-    public function posts()
-    {
-        return $this->hasMany('App\Post');
-    }
-    
-    
     /**
      * The attributes that are mass assignable.
      *
@@ -32,4 +26,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+    
+    public function friends()
+    {
+        return $this->belongsToMany('App\User', 'friends_users', 'user_id', 'friend_id');
+    }
+    
+    public function addFriend(User $user)
+    {
+        $this->friends()->attach($user->id);   
+    }
+    
+    public function removeFriend(User $user)
+    {
+        $this->friends()->detach($user->id);
+    }
+    
+    
+    
 }

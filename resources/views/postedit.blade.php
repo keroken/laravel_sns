@@ -8,8 +8,8 @@
         <form action="{{ url('post/update') }}" method="POST">
             
             <div class="form-group">
-                <label for="message">投稿</label>
-                <input type="text" id="message" name="message" class="form-control" value="{{$post->message}}">
+                <label for="body">投稿</label>
+                <input type="text" id="body" name="body" class="form-control" value="{{$post->body}}">
             </div>
 
             <div class="form-group">

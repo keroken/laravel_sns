@@ -17,9 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('user_id');
-            $table->string('username');
-            $table->text('message');
-            $table->string('image_url');
+            $table->text('body');
         });
     }
 

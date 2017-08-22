@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Auth;
 // ダッシュボード表示
 Route::get('/', 'PostsController@index');
 
-Route::get('/dashboard', function() {
-   return view('dashboard');
-});
+Route::get('/dashboard', 'DashboardController@index');
 
 // 登録処理
 Route::post('/posts', 'PostsController@store');

@@ -14,7 +14,7 @@
                 {{ csrf_field() }}
                 <!-- 投稿タイトル -->
                 <div class="form-group">
-                    <textarea class="form-control" name="message" id="message" rows="5"></textarea>
+                    <textarea class="form-control" name="body" id="body" rows="5"></textarea>
                 </div>
                 <!-- 投稿ボタン -->
                 <div class="form-group">
